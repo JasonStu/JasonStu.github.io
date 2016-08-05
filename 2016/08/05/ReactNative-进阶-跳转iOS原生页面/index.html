@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="✈️Jason_咕咕_Blog">
 <meta property="og:description" content="#RN2iOSNative
 前言最近在写RN的项目的时候发现有个别页面,实在无法用RN来实现就,迫不得已之下就想必须要使用iOS的原生页面了!在使用原生也页面的时候遇到很多问题,发现都是各种姿势不对(姿势很重要)就在摸索的中,休息时突然得到了上帝佛主观音的提示完成了这伟事情!(废话说完入正题)!">
-<meta property="og:updated_time" content="2016-08-05T07:41:47.000Z">
+<meta property="og:updated_time" content="2016-08-05T07:42:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ReactNative(进阶) 跳转iOS原生页面">
 <meta name="twitter:description" content="#RN2iOSNative
@@ -196,7 +196,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>#<a href="https://github.com/JasonStu/RN2iOSNative" target="_blank" rel="external">RN2iOSNative</a></p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近在写RN的项目的时候发现有个别页面,实在无法用RN来实现就,迫不得已之下就想必须要使用iOS的原生页面了!在使用原生也页面的时候遇到很多问题,发现都是各种姿势不对(姿势很重要)就在摸索的中,休息时突然得到了上帝佛主观音的提示完成了这伟事情!(废话说完入正题)!<br><a id="more"></a></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近在写RN的项目的时候发现有个别页面,实在无法用RN来实现就,迫不得已之下就想必须要使用iOS的原生页面了!在使用原生也页面的时候遇到很多问题,发现都是各种姿势不对(姿势很重要)就在摸索的中,休息时突然得到了上帝佛主观音的提示完成了这伟事情!(废话说完入正题)!</p>
+<a id="more"></a>
 <p>###总结之前为什么跳转失败的原因<br>没有拿到navigation<br>没有拿到navigation<br>没有拿到navigation</p>
 <h1 id="一-配置OC关键代码"><a href="#一-配置OC关键代码" class="headerlink" title="一.配置OC关键代码"></a>一.配置OC关键代码</h1><p>  1.在XCode 中的AppDelegate.h 添加 UINavigationController控件.<br>(这里为什么要添加 UINavigationController 因为在原生的页面跳转是需要 UINavigationController 的控制,或者说大部分跳转不过去是因为在iOS原生页面没有 UINavigationController 没有Navigation又怎么能今天页面的跳转呢?)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">@interface AppDelegate : UIResponder &lt;UIApplicationDelegate&gt;</div><div class="line"></div><div class="line">@property (nonatomic, strong) UIWindow *window;</div><div class="line">//关键代码</div><div class="line">@property (nonatomic, strong) UINavigationController *nav;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure></p>
 <p>2.在.m文件中让 rootViewController 接受navigation的管理<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//关键代码</div><div class="line">  _nav=[[UINavigationController alloc]initWithRootViewController:rootViewController];</div><div class="line">  _nav.navigationBarHidden = YES;</div><div class="line">  </div><div class="line">  self.window.rootViewController = _nav;</div><div class="line"></div><div class="line">  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doNotification:) name:@&quot;RNOpenVC&quot; object:nil];</div></pre></td></tr></table></figure></p>
